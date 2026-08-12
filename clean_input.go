@@ -1,9 +1,12 @@
-package clean_input
+package main
+
 import "strings"
 
 func cleanInput(text string) []string {
 
-	split_text := strings.Split(strings.ToLower(text), " ")
-	return split_text
+	trimmedText := strings.TrimSpace(text)
+	loweredText := strings.ToLower(trimmedText)
+	splitText := strings.Split(loweredText, " ")
+	return splitText
 
 }
