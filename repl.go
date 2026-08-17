@@ -75,7 +75,7 @@ func exit() error {
 }
 
 func help() error {
-	fmt.Printf("Welcome to Pokedex!\n")
+	fmt.Printf("Welcome to the Pokedex!\n")
 	fmt.Printf("Usage:\n")
 	for name, cmd := range cliCommands {
 		fmt.Printf("  - %v: %v\n", name, cmd.description)
