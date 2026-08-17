@@ -4,9 +4,8 @@ import "strings"
 
 func cleanInput(text string) []string {
 
-	trimmedText := strings.TrimSpace(text)
-	loweredText := strings.ToLower(trimmedText)
-	splitText := strings.Split(loweredText, " ")
+	loweredText := strings.ToLower(text)
+	splitText := strings.Fields(loweredText)
 	return splitText
 
 }
