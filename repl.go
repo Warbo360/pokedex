@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"bufio"
 	"os"
+	"strings"
 )
 
 func startRepl() {
@@ -18,4 +19,12 @@ func startRepl() {
 		}
 		fmt.Printf("Your command was: %v\n", cleanedInput[0])
 	}
+}
+
+func cleanInput(text string) []string {
+
+	loweredText := strings.ToLower(text)
+	splitText := strings.Fields(loweredText)
+	return splitText
+
 }
