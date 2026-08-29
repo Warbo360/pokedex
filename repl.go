@@ -5,10 +5,14 @@ import (
 	"bufio"
 	"os"
 	"strings"
+	"github.com/Warbo360/pokedexcli/internal/pokeapi"
 )
 
 type config struct {
 	commands map[string]cliCommand
+	pokeapiClient pokeapi.Client
+	nextLocationsURL *string
+	prevLocationsURL *string
 }
 
 func startRepl(cfg *config) {
@@ -53,6 +57,16 @@ func getCommands() map[string]cliCommand {
 			name: "help",
 			description: "Displays a help message",
 			callback: commandHelp,
+		},
+		"map": {
+			name: "map",
+			description: "Get next page of locations",
+			callback: commandMapf,
+		},
+		"mapb": {
+			name: "mapb",
+			description: "Get previous page of locations",
+			callback: commandMapb,
 		},
 		"exit": {
 			name: "exit",
