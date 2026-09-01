@@ -11,6 +11,18 @@ func (c *Client) ListLocations(pageURL *string) (RespShallowLocations, error) {
 	if pageURL != nil {
 		url = *pageURL
 	}
+
+	// NOTE: This is a repeat of the last bit from the cache miss block, should refactor into a help func or getting the
+	// bytes first then unmarshalling
+
+	if value, ok := c.cache.Get(url); ok {
+		locationsResp := RespShallowLocations{}
+		err := json.Unmarshal(value, &locationsResp)
+		if err != nil {
+			return RespShallowLocations{}, err
+		}
+        return locationsResp, nil
+	}
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return RespShallowLocations{}, err
@@ -29,5 +41,6 @@ func (c *Client) ListLocations(pageURL *string) (RespShallowLocations, error) {
 	if err != nil {
 		return RespShallowLocations{}, err
 	}
+	c.cache.Add(url, dat)
 	return locationsResp, nil
 }
